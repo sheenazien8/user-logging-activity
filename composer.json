@@ -1,0 +1,54 @@
+{
+    "name": "lakasir/user-logging-activity",
+    "description": "user-logging-activity package provides easy to use functions to log the activities of the users of your app. It can also automatically log model events. All activity will be stored in the activity_log table.",
+    "keywords": [
+        "lakasir",
+        "user-logging-activity"
+    ],
+    "homepage": "https://github.com/lakasir/user-logging-activity",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "sheenazien8",
+            "email": "sheenazien08@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lakasir\\UserLoggingActivity\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lakasir\\UserLoggingActivity\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lakasir\\UserLoggingActivity\\UserLoggingActivityServiceProvider"
+            ],
+            "aliases": {
+                "UserLoggingActivity": "Lakasir\\UserLoggingActivity\\UserLoggingActivityFacade"
+            }
+        }
+    }
+}
