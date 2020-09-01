@@ -2,9 +2,10 @@
 
 namespace Lakasir\UserLoggingActivity;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 
-class UserLoggingActivityServiceProvider extends ServiceProvider
+class ActivityServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -16,13 +17,18 @@ class UserLoggingActivityServiceProvider extends ServiceProvider
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'user-logging-activity');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'user-logging-activity');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('user-logging-activity.php'),
+                __DIR__.'/../config/activity_log.php' => config_path('activity_log.php'),
             ], 'config');
+
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_activity_log_table.php.stub'
+                => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_activity_log_table.php'),
+            ], 'migrations');
 
             // Publishing the views.
             /*$this->publishes([
@@ -50,11 +56,11 @@ class UserLoggingActivityServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'user-logging-activity');
+        $this->mergeConfigFrom(__DIR__.'/../config/activity_log.php', 'activity_log');
 
         // Register the main class to use with the facade
         $this->app->singleton('user-logging-activity', function () {
-            return new UserLoggingActivity;
+            return new Activity();
         });
     }
 }

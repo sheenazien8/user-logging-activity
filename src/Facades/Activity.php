@@ -1,13 +1,13 @@
 <?php
 
-namespace Lakasir\UserLoggingActivity;
+namespace Lakasir\UserLoggingActivity\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \Lakasir\UserLoggingActivity\Skeleton\SkeletonClass
  */
-class UserLoggingActivityFacade extends Facade
+class Activity extends Facade
 {
     /**
      * Get the registered name of the component.
